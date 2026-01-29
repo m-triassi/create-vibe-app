@@ -12,12 +12,6 @@ You don't need to install anything globally. Just run:
 npx @m-triassi/create-vibe-app
 ```
 
-Or if you prefer the npm init syntax:
-
-```bash
-npm @m-triassi/create vibe-app
-```
-
 ## What it actually does
 
 When you run the command, the script executes a sequence that mimics a manual setup, but faster and less prone to user error:
