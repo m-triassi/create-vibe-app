@@ -20,13 +20,14 @@ When you run the command, the script executes a sequence that mimics a manual se
 2. **Asks for details**: It prompts for a project name and author.
 3. **Finds and replaces**: It scans the directory and swaps out placeholders (like :application_title) in both file contents and filenames. It's smart enough to skip binary files so it doesn't corrupt your images.
 4. **Cleans up**: It removes the init.sh script that comes with the raw template because you don't need it anymore.
-5. **Cloudflare setup**: It checks if you have wrangler installed. If you do, it tries to create a new Cloudflare Pages project for you immediately.
+5. **Cloudflare setup**: If you have Wrangler installed, it can now optionally walk you through creating a new Cloudflare Pages project during setup.
+6. **Optional GitHub setup**: If GitHub CLI (`gh`) is installed, it can optionally initialize the new folder as a git repository, create a GitHub repo from that local folder, and prompt you to save the required Cloudflare secrets as GitHub Actions secrets.
 
 ## Deploying to Cloudflare
 
 The template includes a GitHub Action for automatic deployment, but it needs permission to talk to your Cloudflare account.
 
-After the CLI finishes, you need to add two secrets to your new GitHub repository:
+After the CLI finishes, you need to add two secrets to your new GitHub repository. If `gh` is installed, the CLI can now optionally do this for you interactively during setup.
 
 `CLOUDFLARE_ACCOUNT_ID`: Found on the right sidebar of your Cloudflare Workers & Pages dashboard.
 
