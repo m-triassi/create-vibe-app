@@ -6,41 +6,17 @@ import degit from "degit";
 import chalk from "chalk";
 import fg from "fast-glob";
 import { confirm, input, password } from "@inquirer/prompts";
-import { spawnSync } from "child_process";
+import {
+    KEBAB_OR_SNAKE_CASE,
+    applyReplacements,
+    commandExists,
+    formatDefault,
+    isBinary,
+    run,
+} from "../src/lib.js";
 
 const REPO_URL = "m-triassi/ai-react-template";
 const PLACEHOLDERS = [":application_title", ":author_name"];
-const BINARY_EXTENSIONS = new Set([
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".gif",
-    ".svg",
-    ".ico",
-    ".woff",
-    ".woff2",
-    ".eot",
-    ".ttf",
-    ".otf",
-    ".DS_Store",
-]);
-
-const formatDefault = (placeholder) =>
-    placeholder
-        .replace(/^:/, "")
-        .split("_")
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(" ");
-const KEBAB_OR_SNAKE_CASE = /^[a-z0-9]+([-_][a-z0-9]+)*$/;
-const isBinary = (filePath) => BINARY_EXTENSIONS.has(path.extname(filePath).toLowerCase());
-const commandExists = (command) => spawnSync(command, ["--version"], { stdio: "ignore" }).status === 0;
-const applyReplacements = (value, replacements) =>
-    Object.entries(replacements).reduce((result, [from, to]) => result.replaceAll(from, to), value);
-
-function run(command, args, cwd) {
-    const { status, error } = spawnSync(command, args, { cwd, stdio: "inherit" });
-    if (error || status) throw error || new Error(`${command} exited with code ${status}`);
-}
 
 function printManualCloudflareInstructions(step) {
     console.log(`${step}. ${chalk.cyan("Create Cloudflare Pages Project:")}`);
